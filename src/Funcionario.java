@@ -14,4 +14,6 @@ public class Funcionario {
 		public int IdDoSindicato;
 		public int TaxaSindical;
 		public int EsseLocaleVago;
+		public int HorasTotais;
+		public int HorasExtras;
 }

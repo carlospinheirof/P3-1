@@ -16,13 +16,14 @@ public class Main {
 	   int comando, NumeroDeFuncionarios = 0;
 	   Scanner ler = new Scanner(System.in);
 	   String piu;
-	   int i;
+	   int i, j;
 	   for(i=0; i<50; i++)
 	   {
 		   funcionarios[i] = new Funcionario();
 		   funcionarios[i].EsseLocaleVago = 0;
 		   funcionarios[i].numero = i;
-		   
+		   funcionarios[i].HorasTotais = 0;
+		   funcionarios[i].HorasExtras = 0;
 	   }
 	    while(true){
 	    	comando = ler.nextInt();
@@ -45,31 +46,59 @@ public class Main {
 	    					System.out.println("então, quanto ele ganha por hora ?");
 	    					funcionarios[i].PorHora = ler.nextInt();
 	    					piu = ler.nextLine();
-	    					System.out.printf("%d\n", funcionarios[i].PorHora);
+	    					//System.out.printf("%d\n", funcionarios[i].PorHora);
 	    				}
 	    				else if(funcionarios[i].tipo == 2){
 	    					System.out.println("então, quanto ele ganha de salário ?");
 	    					funcionarios[i].salario = ler.nextInt();
 	    					piu = ler.nextLine();
-	    					System.out.printf("%d\n", funcionarios[i].salario);
+	    					//System.out.printf("%d\n", funcionarios[i].salario);
 	    				}
 	    				else{
 	    					System.out.println("então, quanto ele ganha de comissão ?");
 	    					funcionarios[i].comissao = ler.nextInt();
 	    					piu = ler.nextLine();
-	    					System.out.printf("%d\n", funcionarios[i].comissao);
+	    					//System.out.printf("%d\n", funcionarios[i].comissao);
 	    				}
 	    			System.out.println("\tqual o enderaço do novo funcionário?");
 	    			funcionarios[i].endereco = ler.nextLine();
 	    			System.out.printf("pronto!, o novo funcionario foi adicionado\nseu ID é : %d\n", funcionarios[i].numero);	
-	    			System.out.printf("%s\n", funcionarios[i].nome);
-	    			System.out.printf("%d\n", funcionarios[i].tipo);
-	    			System.out.printf("%s\n", funcionarios[i].endereco);
+	    		//	System.out.printf("%s\n", funcionarios[i].nome);
+	    		//	System.out.printf("%d\n", funcionarios[i].tipo);
+	    		//	System.out.printf("%s\n", funcionarios[i].endereco);
 	    			NumeroDeFuncionarios++;
 	    			}
 	    			else{
 	    				System.out.println("você ja alcançou o total de funcionarios permitidos.");
 	    			}
+	    		}
+	    		else if(comando == 2){									//segunda opção
+	   
+	    			System.out.println("você escolheu remover um funcionário\n");
+	    			System.out.println("digite o ID do funcionario\n");
+	    				i = ler.nextInt();
+	    				piu = ler.nextLine();
+	    			funcionarios[i].EsseLocaleVago = 0;
+	    			System.out.println("removido com sucesso\n");
+	    			NumeroDeFuncionarios--;
+	    		}
+	    		else if(comando == 3){									// terceira opção
+	    			System.out.println("você escolheu Lançar um Cartão de Ponto\n");
+	    			System.out.println("Digite o ID do funcionário\n");
+	    			i = ler.nextInt();
+	    			System.out.println("Digite as horas trabalhadas\n");
+	    			j = ler.nextInt();
+	    			if(j <= 8){
+	    				funcionarios[i].HorasTotais += j;
+	    				
+	    			}
+	    			else{
+	    				funcionarios[i].HorasTotais += 8;
+	    				//System.out.printf("%d\n", funcionarios[i].HorasTotais);
+	    				funcionarios[i].HorasExtras += j - 8;
+	    				//System.out.printf("%d\n", funcionarios[i].HorasExtras);
+	    			}
+	    			System.out.println("ponto lançado com sucesso\n");
 	    		}
 	    	}
 	    }
