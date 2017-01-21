@@ -4,17 +4,19 @@ public class Funcionario {
 		public String nome;
 		public String endereco;
 		public int tipo;
-		public int salario;
-		public int PorHora;
+		public int ComoRecebe;
+		public float salario;
+		public float PorHora;
 		public int numero;
 		public int DiaDaSemana;
 		public int DiaDoMes;
-		public int comissao;
-		public int EdoSindicato;
+		public float comissao;
+		public int PertenceSindicato;
+		public float TaxadeServico;
 		public int IdDoSindicato;
-		public int TaxaSindical;
+		public float TaxaSindical;
 		public int EsseLocaleVago;
 		public int HorasTotais;
 		public int HorasExtras;
-		public int QuantoVendeu;
+		public float QuantoVendeu;
 }

@@ -17,6 +17,7 @@ public class Main {
 	   Scanner ler = new Scanner(System.in);
 	   String piu;
 	   int i, j;
+	   float p;
 	   for(i=0; i<50; i++)
 	   {
 		   funcionarios[i] = new Funcionario();
@@ -25,6 +26,7 @@ public class Main {
 		   funcionarios[i].HorasTotais = 0;
 		   funcionarios[i].HorasExtras = 0;
 		   funcionarios[i].QuantoVendeu = 0;
+		   funcionarios[i].TaxadeServico = 0;
 	   }
 	    while(true){
 	    	comando = ler.nextInt();
@@ -36,34 +38,40 @@ public class Main {
 	    		if(comando == 1){																//aqui começa a primeira etapa
 	    			if(NumeroDeFuncionarios < 50){
 	    			System.out.println("você escolheu adicionar um funcionário\n");
-	    			System.out.println("\tdigite o nome do novo empregado");
+	    			System.out.println("digite o nome do novo empregado");
 	    				for(i = 0; funcionarios[i].EsseLocaleVago == 1; i++){}
 	    			funcionarios[i].nome = ler.nextLine(); //adicionando o nome ao funcionario.	
 	    			funcionarios[i].EsseLocaleVago = 1;
-	    			System.out.println("\tdigite o tipo do funcionario, pelo que ele é pago.");
+	    			System.out.println("digite o tipo do funcionario, pelo que ele é pago.");
 	    			System.out.println(" 1 - por hora\n 2 - salário\n 3 - por comissão");
 	    			funcionarios[i].tipo = ler.nextInt(); //recebendo o seu tipo.
 	    				if(funcionarios[i].tipo == 1){ //quanto ganha por determinada coisa.
 	    					System.out.println("então, quanto ele ganha por hora ?");
-	    					funcionarios[i].PorHora = ler.nextInt();
+	    					funcionarios[i].PorHora = ler.nextFloat();
 	    					piu = ler.nextLine();
 	    					//System.out.printf("%d\n", funcionarios[i].PorHora);
 	    				}
 	    				else if(funcionarios[i].tipo == 2){
 	    					System.out.println("então, quanto ele ganha de salário ?");
-	    					funcionarios[i].salario = ler.nextInt();
+	    					funcionarios[i].salario = ler.nextFloat();
 	    					piu = ler.nextLine();
 	    					//System.out.printf("%d\n", funcionarios[i].salario);
 	    				}
 	    				else{
+	    					System.out.println("então, quanto ele ganha de salário ?");
+	    					funcionarios[i].salario = (ler.nextFloat())/2;
 	    					System.out.println("então, quanto ele ganha de comissão ?");
-	    					funcionarios[i].comissao = ler.nextInt();
+	    					funcionarios[i].comissao = ler.nextFloat();
 	    					piu = ler.nextLine();
 	    					//System.out.printf("%d\n", funcionarios[i].comissao);
 	    				}
-	    			System.out.println("\tqual o enderaço do novo funcionário?");
+	    			System.out.println("qual o enderaço do novo funcionário?");
 	    			funcionarios[i].endereco = ler.nextLine();
+	    			System.out.println("Como ele gostaria de receber?");
+	    			System.out.println("1 - cheque pelos correios\n2 - cheque em mãos\n3 - depósito bancario");
+	    			funcionarios[i].ComoRecebe = ler.nextInt();
 	    			System.out.printf("pronto!, o novo funcionario foi adicionado\nseu ID é : %d\n", funcionarios[i].numero);	
+	    			funcionarios[i].IdDoSindicato = 50-i;
 	    		//	System.out.printf("%s\n", funcionarios[i].nome);
 	    		//	System.out.printf("%d\n", funcionarios[i].tipo);
 	    		//	System.out.printf("%s\n", funcionarios[i].endereco);
@@ -106,9 +114,47 @@ public class Main {
 	    			System.out.println("Informe o ID do funcionário que realizou a venda\n");
 	    			i = ler.nextInt();
 	    			System.out.println("Valor da venda\n");
-	    			j = ler.nextInt();
-	    			funcionarios[i].QuantoVendeu += j;
+	    			p = ler.nextFloat();
+	    			funcionarios[i].QuantoVendeu += p;
 	    			System.out.println("Venda adicionada corretamente\n");
+	    		}
+	    		else if(comando == 5){							// quinta opção
+	    			System.out.println("você escolheu lançar uma taxa de serviço");
+	    			System.out.println("Digite o ID(do sindicato) referente ao funcionário");
+	    			j = ler.nextInt();
+	    			for(i = 0; funcionarios[i].IdDoSindicato == j; i++){}
+	    			System.out.println("digite o valor da taxa");
+	    			p = ler.nextFloat();
+	    			funcionarios[i].TaxadeServico += p;
+	    			System.out.println("Taxa de serviço adicionada com sucesso");
+	    		}
+	    		else if(comando == 6){							// sexta opção
+	    			System.out.println("Você escolheu alterar os dados do funcionário");
+	    			System.out.println("Digite o ID do funcionário");
+	    			i = ler.nextInt();
+	    			piu = ler.nextLine();
+	    			System.out.println("muito bem, agora, apra começar");
+	    			System.out.println("Digite o nome do funcionário");
+	    			funcionarios[i].nome = ler.nextLine();
+	    			System.out.printf("%s\n", funcionarios[i].nome);
+	    			System.out.println("Digite o endereço");
+	    			funcionarios[i].endereco = ler.nextLine();
+	    			System.out.printf("%s\n", funcionarios[i].endereco);
+	    			System.out.println("Digite seu tipo");
+	    			System.out.println(" 1 - por hora\n 2 - salário\n 3 - por comissão");
+	    			funcionarios[i].tipo = ler.nextInt();
+	    			System.out.println("Digite a forma de pagamento");
+	    			System.out.println("1 - cheque pelos correios\n2 - cheque em mãos\n3 - depósito bancario");
+	    			funcionarios[i].ComoRecebe = ler.nextInt();
+	    			System.out.println("Pertence ao sindicato ? 1- sim 2-não");
+	    			funcionarios[i].PertenceSindicato = ler.nextInt();
+	    			if(funcionarios[i].PertenceSindicato == 1){
+	    				System.out.println("identificação do sindicato");
+	    				funcionarios[i].IdDoSindicato = ler.nextInt();
+	    				System.out.println("taca sindical");
+	    				funcionarios[i].TaxaSindical = ler.nextFloat();
+	    			}
+	    			System.out.println("Dados do funcionário atualizados com sucesso");
 	    		}
 	    	}
 	    }
