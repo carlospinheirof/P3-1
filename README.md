@@ -4,7 +4,7 @@ Primeiro projetinho para p3, fazer uma folha de pagamento.
 Adição de um empregado - V
 Remoção de um empregado - V
 Lançar um Cartão de Ponto - V
-Lançar um Resultado Venda - x
+Lançar um Resultado Venda - V
 Lançar uma taxa de serviço - x
 Alterar detalhes de um empregado - x
 Rodar a folha de pagamento para hoje - x

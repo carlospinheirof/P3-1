@@ -16,4 +16,5 @@ public class Funcionario {
 		public int EsseLocaleVago;
 		public int HorasTotais;
 		public int HorasExtras;
+		public int QuantoVendeu;
 }

@@ -24,6 +24,7 @@ public class Main {
 		   funcionarios[i].numero = i;
 		   funcionarios[i].HorasTotais = 0;
 		   funcionarios[i].HorasExtras = 0;
+		   funcionarios[i].QuantoVendeu = 0;
 	   }
 	    while(true){
 	    	comando = ler.nextInt();
@@ -99,6 +100,15 @@ public class Main {
 	    				//System.out.printf("%d\n", funcionarios[i].HorasExtras);
 	    			}
 	    			System.out.println("ponto lançado com sucesso\n");
+	    		}
+	    		else if(comando == 4){								// quarta opção 
+	    			System.out.println("você escolheu Lançar uma venda\n");
+	    			System.out.println("Informe o ID do funcionário que realizou a venda\n");
+	    			i = ler.nextInt();
+	    			System.out.println("Valor da venda\n");
+	    			j = ler.nextInt();
+	    			funcionarios[i].QuantoVendeu += j;
+	    			System.out.println("Venda adicionada corretamente\n");
 	    		}
 	    	}
 	    }
