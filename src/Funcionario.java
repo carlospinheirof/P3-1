@@ -19,4 +19,6 @@ public class Funcionario {
 		public int HorasTotais;
 		public int HorasExtras;
 		public float QuantoVendeu;
+		public int ContadordeSemana;
+		public int FoiMotificado;
 }

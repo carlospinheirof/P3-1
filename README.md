@@ -7,7 +7,7 @@ Lançar um Cartão de Ponto - V
 Lançar um Resultado Venda - V
 Lançar uma taxa de serviço - V
 Alterar detalhes de um empregado - V
-Rodar a folha de pagamento para hoje - x
+Rodar a folha de pagamento para hoje - V
 Undo/redo - x
 Agenda de Pagamento - x
 Criação de Novas Agendas de Pagamento - x
