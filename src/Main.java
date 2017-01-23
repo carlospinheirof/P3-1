@@ -117,7 +117,6 @@ public class Main {
 	    					funcionarios[i].salario = (ler.nextFloat())/2;
 	    					System.out.println("então, quanto ele ganha de comissão ?");
 	    					funcionarios[i].comissao = (ler.nextFloat())/100;
-	    					//System.out.printf("%.2f", funcionarios[i].comissao);
 	    					funcionarios[i].DiaDaSemana = 5;
 	    					funcionarios[i].ContadordeSemana = 0;
 	    					piu = ler.nextLine();
