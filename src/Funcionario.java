@@ -5,6 +5,7 @@ public class Funcionario {
 		public String endereco;
 		public int tipo;
 		public int ComoRecebe;
+		public int JaRecebeuHoje;
 		public float salario;
 		public float PorHora;
 		public int numero;

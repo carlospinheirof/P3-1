@@ -21,7 +21,10 @@ public class Main {
 	   int DiaAtualDoMes;
 	   int DiaAtualDaSemana;
 	   int exclusivoparaloop;
-	   System.out.println("atenção, o estágiario não soube fazer o funcionamento da data direito, então ela só mudará quando você rodar a folha, logo só faça isso quando o ultimo funcionário bater o ponto do dia.");
+	   int PuleiSabadoeDomigo = 0;
+	   int PasseiDeTrinta = 0;
+	   int relogio = 0;
+	   System.out.println("atenção, o estagiário não soube como conectar o programa ao relógio interno do computador, logo o dia irá passar depois de 5 comandos válidos");
 	   System.out.println("digite o dia do més, entre 1 e 30");
 	   i = ler.nextInt();
 	   if(i < 1 || i > 30){
@@ -224,7 +227,7 @@ public class Main {
 	    			}
 	    			for(i = 0; i < 50; i++)
 	    			{
-	    				if(funcionarios[i].tipo == 1){
+	    				if(funcionarios[i].tipo == 1 && funcionarios[i].JaRecebeuHoje == 0){
 	    					if(funcionarios[i].DiaDaSemana == DiaAtualDaSemana){
 	    						System.out.printf("o %s trabalhou irá receber hoje\n", funcionarios[i].nome);
 	    						System.out.printf("Receberá %.2f pelas horas trabalhadas\n", (funcionarios[i].HorasTotais * funcionarios[i].PorHora));
@@ -248,10 +251,11 @@ public class Main {
 	    						funcionarios[i].HorasTotais = 0;
 	    						funcionarios[i].HorasExtras = 0;
 	    						funcionarios[i].TaxadeServico = 0;
+	    						funcionarios[i].JaRecebeuHoje = 1;
 	    						funcionarios[i].FoiMotificado = 1;
 	    					}
 	    				}
-	    				else if(funcionarios[i].tipo == 2){
+	    				else if(funcionarios[i].tipo == 2 && funcionarios[i].JaRecebeuHoje == 0){
 	    					if(funcionarios[i].DiaDoMes == DiaAtualDoMes){
 	    						System.out.printf("o %s trabalhou irá receber hoje\n", funcionarios[i].nome);
 	    						System.out.printf("Ele recebe %.2f\n", funcionarios[i].salario);
@@ -271,6 +275,7 @@ public class Main {
 	    						System.out.printf("total a receber %.2f\n", (funcionarios[i].salario - (funcionarios[i].TaxaSindical+funcionarios[i].TaxadeServico)));
 	    						/* espaço para a replicação */
 	    						funcionarios[i].TaxadeServico = 0;
+	    						funcionarios[i].JaRecebeuHoje = 1;
 	    						funcionarios[i].FoiMotificado = 1;
 	    					}
 	    					else if(DiaAtualDaSemana == 5){
@@ -302,11 +307,12 @@ public class Main {
 		    						System.out.printf("total a receber %.2f\n", (funcionarios[i].salario - (funcionarios[i].TaxaSindical+funcionarios[i].TaxadeServico)));
 		    						/* espaço para a replicação */
 		    						funcionarios[i].TaxadeServico = 0;
+		    						funcionarios[i].JaRecebeuHoje = 1;
 		    						funcionarios[i].FoiMotificado = 1;
 	    						}
 	    					}
 	    				}
-	    				else if(funcionarios[i].tipo == 3){
+	    				else if(funcionarios[i].tipo == 3 && funcionarios[i].JaRecebeuHoje == 0){
 	    					if(funcionarios[i].ContadordeSemana == 1){
 	    						/* espaço para a replicação */
 	    						funcionarios[i].ContadordeSemana = 0;
@@ -333,14 +339,28 @@ public class Main {
 	    						/* espaço para a replicação */
 	    						funcionarios[i].QuantoVendeu = 0;
 	    						funcionarios[i].TaxadeServico = 0;
+	    						funcionarios[i].JaRecebeuHoje = 1;
 	    						funcionarios[i].FoiMotificado = 1;
 	    						funcionarios[i].ContadordeSemana = 1;
 	    					}
 	    				}
 	    			}
+	    		}
+	    		else if(comando == 8){			// opção 8.
+	    			
+	    		}
+	    		else if(comando == 9){			//opção 9.
+	    			
+	    		}
+	    		else{  							// opção 10.
+	    			
+	    		}
+	    		
+	    		relogio += 1; 
+	    		if(relogio == 5){
 	    			if(DiaAtualDaSemana == 5){ //pulando sabado e domingo.
 	    				DiaAtualDaSemana = 1;
-	    				DiaAtualDoMes +=2;
+	    				DiaAtualDoMes +=3;
 	    				if(DiaAtualDoMes > 30){
 	    					DiaAtualDoMes -= 30;
 	    				}
@@ -352,6 +372,10 @@ public class Main {
 	    					DiaAtualDoMes -= 30;
 	    				}
 	    			}
+	    			for(exclusivoparaloop = 0; exclusivoparaloop < 50; exclusivoparaloop++){
+	    				funcionarios[exclusivoparaloop].JaRecebeuHoje = 0;
+	    			}
+	    			relogio = 0;
 	    		}
 	    	}
 	    }
