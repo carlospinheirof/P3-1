@@ -1,5 +1,5 @@
 # P3-1
-Primeiro projetinho para p3, fazer uma folha de pagamento.
+Primeiro projetinho para p3, fazer uma folha de pagamento. Finalizado.
 
 Adição de um empregado - V  
 Remoção de um empregado - V  
