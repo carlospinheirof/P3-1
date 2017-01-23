@@ -18,12 +18,19 @@ public class Main {
 	   int comando, NumeroDeFuncionarios = 0;
 	   Scanner ler = new Scanner(System.in);
 	   String piu;
+	   String informacao;
+	   int[] AgendasMensais = new int[31];
+	   AgendasMensais[30] = 1;
+	   int[] AgendasSemanais = new int[6];
+	   AgendasSemanais[5] = 1;
+	   int[] AgendasBisemanais = new int[6];
+	   AgendasBisemanais[5] = 1;
 	   int i, j, o;
 	   float p;
 	   int DiaAtualDoMes;
 	   int DiaAtualDaSemana;
 	   int exclusivoparaloop;
-	   int anteriordonumerodefuncionarios, ajudaoNumero;
+	   int anteriordonumerodefuncionarios = 0, ajudaoNumero;
 	   int comandoAnterior = 9;
 	   int relogio = 0;
 	   System.out.println("atenção, o estagiário não soube como conectar o programa ao relógio interno do computador, logo o dia irá passar depois de 5 comandos válidos");
@@ -78,7 +85,7 @@ public class Main {
 	    				funcionarios[exclusivoparaloop].FoiMotificado = 0;
 	    			}
 	    			if(NumeroDeFuncionarios < 50){
-	    			System.out.println("você escolheu adicionar um funcionário\n");
+	    			System.out.println("você escolheu adicionar um funcionário");
 	    			System.out.println("digite o nome do novo empregado");
 	    				for(i = 0; funcionarios[i].EsseLocaleVago == 1; i++){}
 	    				/* espaço para a replicação */
@@ -109,7 +116,8 @@ public class Main {
 	    					System.out.println("então, quanto ele ganha de salário ?");
 	    					funcionarios[i].salario = (ler.nextFloat())/2;
 	    					System.out.println("então, quanto ele ganha de comissão ?");
-	    					funcionarios[i].comissao = ler.nextFloat();
+	    					funcionarios[i].comissao = (ler.nextFloat())/100;
+	    					//System.out.printf("%.2f", funcionarios[i].comissao);
 	    					funcionarios[i].DiaDaSemana = 5;
 	    					funcionarios[i].ContadordeSemana = 0;
 	    					piu = ler.nextLine();
@@ -391,12 +399,18 @@ public class Main {
 		    			if((comandoAnterior == 1) && funcionarios[i].FoiMotificado == 1){
 		    				auxiliador.EsseLocaleVago = funcionarios[i].EsseLocaleVago;	    				
 		    				funcionarios[i].EsseLocaleVago = auxiliares[i].EsseLocaleVago;	
-		    				auxiliares[i].EsseLocaleVago = auxiliador.EsseLocaleVago;		    				
+		    				auxiliares[i].EsseLocaleVago = auxiliador.EsseLocaleVago;	
+		    				ajudaoNumero = NumeroDeFuncionarios;
+		    				NumeroDeFuncionarios = anteriordonumerodefuncionarios;
+		    				anteriordonumerodefuncionarios = ajudaoNumero;
 		    			}
 		    			else if(comandoAnterior == 2 && funcionarios[i].FoiMotificado == 1){
 		    				auxiliador.EsseLocaleVago = funcionarios[i].EsseLocaleVago;
 		    				funcionarios[i].EsseLocaleVago = auxiliares[i].EsseLocaleVago;
 		    				auxiliares[i].EsseLocaleVago = auxiliador.EsseLocaleVago;
+		    				ajudaoNumero = NumeroDeFuncionarios;
+		    				NumeroDeFuncionarios = anteriordonumerodefuncionarios;
+		    				anteriordonumerodefuncionarios = ajudaoNumero;
 		    			}
 		    			else if(comandoAnterior == 3  && funcionarios[i].FoiMotificado == 1){
 		    				auxiliador.HorasExtras = funcionarios[i].HorasExtras;
@@ -457,10 +471,91 @@ public class Main {
 	    			System.out.println("Comando anterior cancelado com sucesso.");
 	    		}
 	    		else if(comando == 9){			//opção 9.
-	    			
+	    			System.out.println("Você escolheu selecionar uma nova agenda de pagamentos");
+	    			System.out.println("Digite o Id do funcionario");
+	    			i = ler.nextInt();
+	    			if(funcionarios[i].tipo == 1){
+	    				System.out.println("Escolha o dia da semana que deseja receber.\nSendo 1 - segunda a 5 - sexta.");
+	    				j = ler.nextInt();
+	    				if(AgendasSemanais[j] == 1){
+	    					funcionarios[i].DiaDaSemana = j;
+	    					System.out.println("Foi atualizado com sucesso.");
+	    				}
+	    				else{
+	    					System.out.println("Desculpe, mas esse dia não está disponivel.");
+	    				}
+	    			}
+	    			else if(funcionarios[i].tipo == 2){
+	    				System.out.println("Escolha o dia do més que você deseja receber, simplesmente digite o numero de 1 a 30");
+	    				j = ler.nextInt();
+	    				if(AgendasMensais[j] == 1){
+	    					funcionarios[i].DiaDoMes = j;
+	    					System.out.println("Foi atualizado com sucesso.");
+	    				}
+	    				else{
+	    					System.out.println("Desculpe, mas esse dia não está disponivel.");
+	    				}
+	    			}
+	    			else{
+	    				System.out.println("Escolha o dia da semana que deseja receber.\nSendo 1 - segunda a 5 - sexta.");
+	    				j = ler.nextInt();
+	    				if(AgendasBisemanais[j] == 1){
+	    					funcionarios[i].DiaDaSemana = j;
+	    					System.out.println("Foi atualizado com sucesso.");
+	    				}
+	    				else{
+	    					System.out.println("Desculpe, mas esse dia não está disponivel.");
+	    				}
+	    			}
 	    		}
 	    		else{  							// opção 10.
-	    			
+	    			System.out.println("Você escolheu criar uma nova agenda de pagamentos\ndeve ser digitado o comando do tipo: mensal x, semana 1 segunda, semana 2 segunda.");
+	    			informacao = ler.next();
+	    			if(informacao.equals("mensal")){
+	    				 i = ler.nextInt();
+	    				 AgendasMensais[i] = 1;
+	    			}
+	    			else{
+	    				j = ler.nextInt();
+	    				
+	    				if(j == 1){
+	    					informacao = ler.next();
+	    					if(informacao.equals("segunda")){
+	    						AgendasSemanais[1] = 1;
+	    					}
+	    					else if(informacao.equals("terca")){
+	    						AgendasSemanais[2] = 1;
+	    					}
+	    					else if(informacao.equals("quarta")){
+	    						AgendasSemanais[3] = 1;
+	    					}
+	    					else if(informacao.equals("quinta")){
+	    						AgendasSemanais[4] = 1;
+	    					}
+	    					else{
+	    						AgendasSemanais[5] = 1;
+	    					}
+	    				}
+	    				else{
+	    					informacao = ler.next();
+	    					if(informacao.equals("segunda")){
+	    						AgendasBisemanais[1] = 1;
+	    					}
+	    					else if(informacao.equals("terca")){
+	    						AgendasBisemanais[2] = 1;
+	    					}
+	    					else if(informacao.equals("quarta")){
+	    						AgendasBisemanais[3] = 1;
+	    					}
+	    					else if(informacao.equals("quinta")){
+	    						AgendasBisemanais[4] = 1;
+	    					}
+	    					else{
+	    						AgendasBisemanais[5] = 1;
+	    					}
+	    				}
+	    			}
+	    			//System.out.printf("%d", AgendasSemanais[1]);
 	    		}
 	    		if(comando != 8){
 	    			comandoAnterior = comando;

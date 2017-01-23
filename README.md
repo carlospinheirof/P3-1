@@ -9,5 +9,5 @@ Lançar uma taxa de serviço - V
 Alterar detalhes de um empregado - V  
 Rodar a folha de pagamento para hoje - V  
 Undo/redo - V  
-Agenda de Pagamento - x  
-Criação de Novas Agendas de Pagamento - x  
+Agenda de Pagamento - V  
+Criação de Novas Agendas de Pagamento - V  
