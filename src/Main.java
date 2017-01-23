@@ -2,6 +2,8 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String args[]) {
 		Funcionario[] funcionarios = new Funcionario[50];
+		Funcionario[] auxiliares = new Funcionario[50];
+		Funcionario auxiliador = new Funcionario();
 	    System.out.println("Olá, atenção, digite seu comando, podendo ser de 1 a 10, poderá ter no maximo 50 funcionários.");
 	    System.out.println("1 - add um funcionario.");
 	    System.out.println("2 - Remover um empregado.");
@@ -21,8 +23,8 @@ public class Main {
 	   int DiaAtualDoMes;
 	   int DiaAtualDaSemana;
 	   int exclusivoparaloop;
-	   int PuleiSabadoeDomigo = 0;
-	   int PasseiDeTrinta = 0;
+	   int anteriordonumerodefuncionarios, ajudaoNumero;
+	   int comandoAnterior = 9;
 	   int relogio = 0;
 	   System.out.println("atenção, o estagiário não soube como conectar o programa ao relógio interno do computador, logo o dia irá passar depois de 5 comandos válidos");
 	   System.out.println("digite o dia do més, entre 1 e 30");
@@ -38,7 +40,7 @@ public class Main {
 		   DiaAtualDoMes = i;
 	   }
 	   
-	   System.out.println("digite o dia da semana, entre 1 e 5, sendo 1 - segunda e 7 - sexta");
+	   System.out.println("digite o dia da semana, entre 1 e 5, sendo 1 - segunda e 5 - sexta");
 	   i = ler.nextInt();
 	   if(i < 1 || i > 5){
 		   while(i < 1 || i > 5){
@@ -54,6 +56,7 @@ public class Main {
 	   for(i=0; i<50; i++)
 	   {
 		   funcionarios[i] = new Funcionario();
+		   auxiliares[i] = new Funcionario();
 		   funcionarios[i].EsseLocaleVago = 0;
 		   funcionarios[i].numero = i;
 		   funcionarios[i].HorasTotais = 0;
@@ -74,12 +77,16 @@ public class Main {
 	    			for(exclusivoparaloop = 0; exclusivoparaloop < 50; exclusivoparaloop++){
 	    				funcionarios[exclusivoparaloop].FoiMotificado = 0;
 	    			}
-	    			/* espaço para a replicação */
 	    			if(NumeroDeFuncionarios < 50){
 	    			System.out.println("você escolheu adicionar um funcionário\n");
 	    			System.out.println("digite o nome do novo empregado");
 	    				for(i = 0; funcionarios[i].EsseLocaleVago == 1; i++){}
+	    				/* espaço para a replicação */
+	    				anteriordonumerodefuncionarios = NumeroDeFuncionarios;
+	    				auxiliares[i].EsseLocaleVago = funcionarios[i].EsseLocaleVago;
+	    				/* espaço para a replicação */
 	    			funcionarios[i].nome = ler.nextLine(); //adicionando o nome ao funcionario.	
+	    			auxiliares[i].nome = funcionarios[i].nome;
 	    			funcionarios[i].EsseLocaleVago = 1;
 	    			System.out.println("digite o tipo do funcionario, pelo que ele é pago.");
 	    			System.out.println(" 1 - por hora\n 2 - salário\n 3 - por comissão");
@@ -126,11 +133,14 @@ public class Main {
 	    			for(exclusivoparaloop = 0; exclusivoparaloop < 50; exclusivoparaloop++){
 	    				funcionarios[exclusivoparaloop].FoiMotificado = 0;
 	    			}
-	    			/* espaço para a replicação */
 	    			System.out.println("você escolheu remover um funcionário\n");
 	    			System.out.println("digite o ID do funcionario\n");
 	    				i = ler.nextInt();
 	    				piu = ler.nextLine();
+	    				/* espaço para a replicação */
+		    			anteriordonumerodefuncionarios = NumeroDeFuncionarios;
+		    			auxiliares[i].EsseLocaleVago = funcionarios[i].EsseLocaleVago;
+		    			/* espaço para a replicação */
 	    			funcionarios[i].EsseLocaleVago = 0;
 	    			System.out.println("removido com sucesso\n");
 	    			NumeroDeFuncionarios--;
@@ -140,10 +150,14 @@ public class Main {
 	    			for(exclusivoparaloop = 0; exclusivoparaloop < 50; exclusivoparaloop++){
 	    				funcionarios[exclusivoparaloop].FoiMotificado = 0;
 	    			}
-	    			/* espaço para a replicação */
+	    			
 	    			System.out.println("você escolheu Lançar um Cartão de Ponto\n");
 	    			System.out.println("Digite o ID do funcionário\n");
 	    			i = ler.nextInt();
+	    			/* espaço para a replicação */
+	    			auxiliares[i].HorasTotais = funcionarios[i].HorasTotais;
+	    			auxiliares[i].HorasExtras = funcionarios[i].HorasExtras;
+	    			/* espaço para a replicação */
 	    			System.out.println("Digite as horas trabalhadas\n");
 	    			j = ler.nextInt();
 	    			if(j <= 8){
@@ -163,10 +177,12 @@ public class Main {
 	    			for(exclusivoparaloop = 0; exclusivoparaloop < 50; exclusivoparaloop++){
 	    				funcionarios[exclusivoparaloop].FoiMotificado = 0;
 	    			}
-	    			/* espaço para a replicação */
 	    			System.out.println("você escolheu Lançar uma venda\n");
 	    			System.out.println("Informe o ID do funcionário que realizou a venda\n");
 	    			i = ler.nextInt();
+	    			/* espaço para a replicação */
+	    			auxiliares[i].QuantoVendeu = funcionarios[i].QuantoVendeu;
+	    			/* espaço para a replicação */
 	    			System.out.println("Valor da venda\n");
 	    			p = ler.nextFloat();
 	    			funcionarios[i].QuantoVendeu += p;
@@ -177,11 +193,14 @@ public class Main {
 	    			for(exclusivoparaloop = 0; exclusivoparaloop < 50; exclusivoparaloop++){
 	    				funcionarios[exclusivoparaloop].FoiMotificado = 0;
 	    			}
-	    			/* espaço para a replicação */
 	    			System.out.println("você escolheu lançar uma taxa de serviço");
 	    			System.out.println("Digite o ID(do sindicato) referente ao funcionário");
 	    			j = ler.nextInt();
 	    			for(i = 0; funcionarios[i].IdDoSindicato == j; i++){}
+	    			/* espaço para a replicação */
+	    			auxiliares[i].TaxadeServico = funcionarios[i].TaxadeServico;
+	    			
+	    			/* espaço para a replicação */
 	    			System.out.println("digite o valor da taxa");
 	    			p = ler.nextFloat();
 	    			funcionarios[i].TaxadeServico += p;
@@ -199,23 +218,30 @@ public class Main {
 	    			piu = ler.nextLine();
 	    			System.out.println("muito bem, agora para começar");
 	    			System.out.println("Digite o nome do funcionário");
+	    			auxiliares[i].nome = funcionarios[i].nome;
 	    			funcionarios[i].nome = ler.nextLine();
 	    			//System.out.printf("%s\n", funcionarios[i].nome);
 	    			System.out.println("Digite o endereço");
+	    			auxiliares[i].endereco = funcionarios[i].endereco;
 	    			funcionarios[i].endereco = ler.nextLine();
 	    			//System.out.printf("%s\n", funcionarios[i].endereco);
 	    			System.out.println("Digite seu tipo");
 	    			System.out.println(" 1 - por hora\n 2 - salário\n 3 - por comissão");
+	    			auxiliares[i].tipo = funcionarios[i].tipo;
 	    			funcionarios[i].tipo = ler.nextInt();
 	    			System.out.println("Digite a forma de pagamento");
 	    			System.out.println("1 - cheque pelos correios\n2 - cheque em mãos\n3 - depósito bancario");
+	    			auxiliares[i].ComoRecebe = funcionarios[i].ComoRecebe;
 	    			funcionarios[i].ComoRecebe = ler.nextInt();
 	    			System.out.println("Pertence ao sindicato ? 1- sim 2-não");
+	    			auxiliares[i].PertenceSindicato = funcionarios[i].PertenceSindicato;
 	    			funcionarios[i].PertenceSindicato = ler.nextInt();
 	    			if(funcionarios[i].PertenceSindicato == 1){
 	    				System.out.println("identificação do sindicato");
+	    				auxiliares[i].IdDoSindicato = funcionarios[i].IdDoSindicato;
 	    				funcionarios[i].IdDoSindicato = ler.nextInt();
 	    				System.out.println("taxa sindical");
+	    				auxiliares[i].TaxaSindical = funcionarios[i].TaxaSindical;
 	    				funcionarios[i].TaxaSindical = ler.nextFloat();
 	    			}
 	    			System.out.println("Dados do funcionário atualizados com sucesso");
@@ -248,9 +274,13 @@ public class Main {
 	    						System.out.printf("total a receber %.2f\n", 
 	    						((funcionarios[i].HorasTotais * funcionarios[i].PorHora)+(funcionarios[i].HorasExtras * (funcionarios[i].PorHora * 1.5)) - (funcionarios[i].TaxaSindical+funcionarios[i].TaxadeServico)));
 	    						/* espaço para a replicação */
-	    						funcionarios[i].HorasTotais = 0;
-	    						funcionarios[i].HorasExtras = 0;
+	    						auxiliares[i].HorasTotais = funcionarios[i].HorasTotais;
+	    						funcionarios[i].HorasTotais = 0; 
+	    						auxiliares[i].HorasExtras = funcionarios[i].HorasExtras;
+	    						funcionarios[i].HorasExtras = 0; 
+	    						auxiliares[i].TaxadeServico = funcionarios[i].TaxadeServico;
 	    						funcionarios[i].TaxadeServico = 0;
+	    						auxiliares[i].JaRecebeuHoje = funcionarios[i].JaRecebeuHoje;
 	    						funcionarios[i].JaRecebeuHoje = 1;
 	    						funcionarios[i].FoiMotificado = 1;
 	    					}
@@ -274,7 +304,9 @@ public class Main {
 	    						}
 	    						System.out.printf("total a receber %.2f\n", (funcionarios[i].salario - (funcionarios[i].TaxaSindical+funcionarios[i].TaxadeServico)));
 	    						/* espaço para a replicação */
+	    						auxiliares[i].TaxadeServico = funcionarios[i].TaxadeServico;
 	    						funcionarios[i].TaxadeServico = 0;
+	    						auxiliares[i].JaRecebeuHoje = funcionarios[i].JaRecebeuHoje;
 	    						funcionarios[i].JaRecebeuHoje = 1;
 	    						funcionarios[i].FoiMotificado = 1;
 	    					}
@@ -306,7 +338,9 @@ public class Main {
 
 		    						System.out.printf("total a receber %.2f\n", (funcionarios[i].salario - (funcionarios[i].TaxaSindical+funcionarios[i].TaxadeServico)));
 		    						/* espaço para a replicação */
+		    						auxiliares[i].TaxadeServico = funcionarios[i].TaxadeServico;
 		    						funcionarios[i].TaxadeServico = 0;
+		    						auxiliares[i].JaRecebeuHoje = funcionarios[i].JaRecebeuHoje;
 		    						funcionarios[i].JaRecebeuHoje = 1;
 		    						funcionarios[i].FoiMotificado = 1;
 	    						}
@@ -315,7 +349,9 @@ public class Main {
 	    				else if(funcionarios[i].tipo == 3 && funcionarios[i].JaRecebeuHoje == 0){
 	    					if(funcionarios[i].ContadordeSemana == 1){
 	    						/* espaço para a replicação */
+	    						auxiliares[i].ContadordeSemana = funcionarios[i].ContadordeSemana;
 	    						funcionarios[i].ContadordeSemana = 0;
+	    						funcionarios[i].JaRecebeuHoje = 1;
 	    					}
 	    					else{
 	    						System.out.printf("o %s trabalhou irá receber hoje\n", funcionarios[i].nome);
@@ -337,17 +373,88 @@ public class Main {
 	    						System.out.printf("total a receber %.2f\n", 
 	    								(funcionarios[i].salario + (funcionarios[i].comissao * funcionarios[i].QuantoVendeu) - (funcionarios[i].TaxaSindical+funcionarios[i].TaxadeServico)));
 	    						/* espaço para a replicação */
+	    						auxiliares[i].QuantoVendeu = funcionarios[i].QuantoVendeu;
 	    						funcionarios[i].QuantoVendeu = 0;
+	    						auxiliares[i].TaxadeServico = funcionarios[i].TaxadeServico;
 	    						funcionarios[i].TaxadeServico = 0;
+	    						auxiliares[i].JaRecebeuHoje  = funcionarios[i].JaRecebeuHoje;
 	    						funcionarios[i].JaRecebeuHoje = 1;
 	    						funcionarios[i].FoiMotificado = 1;
+	    						auxiliares[i].ContadordeSemana = funcionarios[i].ContadordeSemana;
 	    						funcionarios[i].ContadordeSemana = 1;
 	    					}
 	    				}
 	    			}
 	    		}
 	    		else if(comando == 8){			// opção 8.
-	    			
+	    			for(i = 0; i <50; i++){
+		    			if((comandoAnterior == 1) && funcionarios[i].FoiMotificado == 1){
+		    				auxiliador.EsseLocaleVago = funcionarios[i].EsseLocaleVago;	    				
+		    				funcionarios[i].EsseLocaleVago = auxiliares[i].EsseLocaleVago;	
+		    				auxiliares[i].EsseLocaleVago = auxiliador.EsseLocaleVago;		    				
+		    			}
+		    			else if(comandoAnterior == 2 && funcionarios[i].FoiMotificado == 1){
+		    				auxiliador.EsseLocaleVago = funcionarios[i].EsseLocaleVago;
+		    				funcionarios[i].EsseLocaleVago = auxiliares[i].EsseLocaleVago;
+		    				auxiliares[i].EsseLocaleVago = auxiliador.EsseLocaleVago;
+		    			}
+		    			else if(comandoAnterior == 3  && funcionarios[i].FoiMotificado == 1){
+		    				auxiliador.HorasExtras = funcionarios[i].HorasExtras;
+		    				auxiliador.HorasTotais = funcionarios[i].HorasTotais;
+		    				funcionarios[i].HorasExtras = auxiliares[i].HorasExtras;
+		    				funcionarios[i].HorasTotais = auxiliares[i].HorasTotais;
+		    				auxiliares[i].HorasExtras = auxiliador.HorasExtras;
+		    				auxiliares[i].HorasTotais = auxiliador.HorasTotais;
+		    			}
+		    			else if(comandoAnterior == 4  && funcionarios[i].FoiMotificado == 1){
+		    				auxiliador.QuantoVendeu = funcionarios[i].QuantoVendeu;
+		    				funcionarios[i].QuantoVendeu = auxiliares[i].QuantoVendeu;
+		    				auxiliares[i].QuantoVendeu = auxiliador.QuantoVendeu;
+		    			}
+		    			else if(comandoAnterior == 5  && funcionarios[i].FoiMotificado == 1){
+		    				auxiliador.TaxadeServico = funcionarios[i].TaxadeServico;
+		    				funcionarios[i].TaxadeServico = auxiliares[i].TaxadeServico;
+		    				auxiliares[i].TaxadeServico = auxiliador.TaxadeServico;
+		    			}
+		    			else if(comandoAnterior == 6  && funcionarios[i].FoiMotificado == 1){
+		    				auxiliador.nome = funcionarios[i].nome;
+		    				auxiliador.endereco = funcionarios[i].endereco;
+		    				auxiliador.tipo = funcionarios[i].tipo;
+		    				auxiliador.ComoRecebe = funcionarios[i].ComoRecebe;
+		    				auxiliador.PertenceSindicato = funcionarios[i].PertenceSindicato;
+		    				funcionarios[i].nome = auxiliares[i].nome;
+		    				funcionarios[i].endereco = auxiliares[i].endereco;
+		    				funcionarios[i].tipo = auxiliares[i].tipo;
+		    				funcionarios[i].ComoRecebe = auxiliares[i].ComoRecebe;
+		    				funcionarios[i].PertenceSindicato = auxiliares[i].PertenceSindicato;
+		    				auxiliares[i].nome = auxiliador.nome;
+		    				auxiliares[i].endereco = auxiliador.endereco;
+		    				auxiliares[i].tipo = auxiliador.tipo;
+		    				auxiliares[i].ComoRecebe = auxiliador.ComoRecebe;
+		    				auxiliares[i].PertenceSindicato = auxiliador.PertenceSindicato; 
+		    			}
+		    			else if(comandoAnterior == 7  && funcionarios[i].FoiMotificado == 1){
+		    				auxiliador.HorasTotais = funcionarios[i].HorasTotais;
+		    				auxiliador.HorasExtras = funcionarios[i].HorasExtras;
+		    				auxiliador.TaxadeServico = funcionarios[i].TaxadeServico;
+		    				auxiliador.JaRecebeuHoje = funcionarios[i].JaRecebeuHoje;
+		    				auxiliador.ContadordeSemana = funcionarios[i].ContadordeSemana;
+		    				auxiliador.QuantoVendeu = funcionarios[i].QuantoVendeu; 
+		    				funcionarios[i].HorasTotais = auxiliares[i].HorasTotais;
+		    				funcionarios[i].HorasExtras = auxiliares[i].HorasExtras;
+		    				funcionarios[i].TaxadeServico = auxiliares[i].TaxadeServico;
+		    				funcionarios[i].JaRecebeuHoje = auxiliares[i].JaRecebeuHoje;
+		    				funcionarios[i].ContadordeSemana = auxiliares[i].ContadordeSemana;
+		    				funcionarios[i].QuantoVendeu = auxiliares[i].QuantoVendeu;
+		    				auxiliares[i].HorasTotais = auxiliador.HorasTotais;
+		    				auxiliares[i].HorasExtras = auxiliador.HorasExtras;
+		    				auxiliares[i].TaxadeServico = auxiliador.TaxadeServico;
+		    				auxiliares[i].JaRecebeuHoje = auxiliador.JaRecebeuHoje;
+		    				auxiliares[i].ContadordeSemana = auxiliador.ContadordeSemana;
+		    				auxiliares[i].QuantoVendeu = auxiliador.QuantoVendeu;
+		    			}
+	    			}
+	    			System.out.println("Comando anterior cancelado com sucesso.");
 	    		}
 	    		else if(comando == 9){			//opção 9.
 	    			
@@ -355,7 +462,9 @@ public class Main {
 	    		else{  							// opção 10.
 	    			
 	    		}
-	    		
+	    		if(comando != 8){
+	    			comandoAnterior = comando;
+	    		}
 	    		relogio += 1; 
 	    		if(relogio == 5){
 	    			if(DiaAtualDaSemana == 5){ //pulando sabado e domingo.
@@ -376,6 +485,7 @@ public class Main {
 	    				funcionarios[exclusivoparaloop].JaRecebeuHoje = 0;
 	    			}
 	    			relogio = 0;
+	    			System.out.printf("Dia foi atualizado, hoje é %d\n", DiaAtualDoMes);
 	    		}
 	    	}
 	    }
